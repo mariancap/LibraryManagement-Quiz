@@ -1,0 +1,61 @@
+Class Diagram:
+
+Quiz:
+
+Properties: questions, userAnswers, correctAnswers, etc.
+Methods: startQuiz(), submitAnswers(), etc.
+
+Question:
+
+Properties: id, questionText, choices, correctAnswer.
+Methods: displayQuestion(), validateAnswer(), etc.
+
+User:
+
+Properties: progress, score, etc.
+Methods: submitAnswer(), getScore(), etc.
+
+Database (or QuizService):
+
+Methods: getQuestions(), saveUserProgress(), etc.
+Database Schema:
+
+
+Questions Table:
+
+Columns: id (Primary Key), questionText, choice1, choice2, choice3, choice4, correctAnswer.
+Users Table:
+
+Columns: id (Primary Key), username, score, progress.
+UserAnswers Table (to represent user progress):
+
+Columns: id (Primary Key), userId (Foreign Key referencing Users Table), questionId (Foreign Key referencing Questions Table), userAnswer.
+Relationships:
+One-to-Many (Questions to UserAnswers):
+
+Each question in the Questions Table may have multiple entries in the UserAnswers Table, representing the answers given by different users.
+One-to-Many (Users to UserAnswers):
+
+Each user in the Users Table may have multiple entries in the UserAnswers Table, representing their progress through different questions.
+Many-to-One (UserAnswers to Questions and Users):
+
+Each entry in the UserAnswers Table is associated with a specific question from the Questions Table and a specific user from the Users Table.
+Flow of Data during the Quiz:
+Start Quiz:
+
+The Quiz class initiates by retrieving questions from the Questions Table in the database.
+Question Display:
+
+The Question class displays the current question and choices.
+User Interaction:
+
+The User class records the user's interaction, such as selecting a choice.
+User Progress:
+
+The UserAnswers Table is updated to reflect the user's progress and selected answers.
+Scoring:
+
+The Quiz class may calculate the user's score based on the correctness of their answers.
+Submission:
+
+Upon quiz completion or submission, the User class may update the Users Table with the final score.
